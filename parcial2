@@ -1,0 +1,133 @@
+import random
+
+def Saludo ():
+    print("Hola, te damos la bienvenida a este programa")
+    
+
+def Vectores():
+    return [random.randint(1, 20) for i in range(50)]
+
+def VectorRepetir(Vectores):
+    return list(set(Vectores))
+
+def Numero_de_Veces(Vectores, num):
+    return Vectores.count(num)
+
+
+def Matrices():
+    matriz= []
+    filas=5
+    columnas=5
+    for _ in range(filas):
+     fila= []
+    for _ in range(columnas):
+        numero_aleatorio= random.randint (100,200)
+        fila.append(numero_aleatorio)
+    matriz.append(fila)
+    
+    for fila in matriz:
+     print(fila)
+
+def Segunda_Matriz(matriz):
+    matriz_dos = []
+    for columna in range(5):
+        fila_dos = []
+        for fila in range(5):
+            if columna == 0:
+                fila_dos.append(matriz[fila][columna] ** 2)
+            else:
+                fila_dos.append(matriz[fila][columna] ** 4)
+        matriz_dos.append(fila_dos)
+    return matriz_dos
+
+
+def Sumar_Fila(matriz):
+    return [sum(fila) for fila in matriz]
+
+def Sumar_Columna(matriz):
+    return [sum(fila[x] for fila in matriz) for x in range(5)]
+
+def Restar_Matrices(Matriz_1, Matriz_2):
+    return [[Matriz_2[x][j] - Matriz_1[x][j] for j in range(5)] for x in range(5)]
+
+def Multiplicar_Matriz(matriz, Numero):
+    return [[Numero * matriz[x][j] for j in range(5)] for x in range(5)]
+
+def Multiplicar_Matrices(Matriz_1, Matriz_2):
+    return [[sum(Matriz_1[x][z] * Matriz_2[z][j] for z in range(5)) for j in range(5)] for x in range(5)]
+
+def Suma_Diagonal_Principal(matriz):
+    return sum(matriz[x][x] for x in range(5))
+
+def Suma_Diagonal_Inversa(matriz):
+    return sum(matriz[x][4 - x] for x in range(5))
+
+def Cálculo_Media_Matriz(matriz):
+    total_elementos = 5 * 5
+    suma_elementos = sum(sum(fila) for fila in matriz)
+    return suma_elementos / total_elementos
+
+def menu():
+    while True:
+        Saludo()
+        print("Menú:")
+        print()
+        print("1. Primer punto (Vectores)")
+        print()
+        print("2. Segundo punto (Matrices)")
+        print()
+        print("3. Salir")
+        print()
+        opcion = input("Por favor digite una opcion: ")
+        print()
+
+
+        if opcion == "1":
+            primer_vector = Vectores()
+            segundo_vector = VectorRepetir(primer_vector)
+            print("Vector:", primer_vector)
+            print("Vector sin repetir:", segundo_vector)
+            numero = int(input("Ingrese un numero para saber cuantas veces se repite:"))
+            repeticiones = Numero_de_Veces(primer_vector, numero)
+            print(f"El número {numero} se repite {repeticiones} veces en el vector.")
+            print("Números de elementos en el primer vector: ", len(primer_vector))
+            print("Números de elementos en el segundo vector sin repetir: ", len(segundo_vector))
+
+        elif opcion == "2":
+            Matriz_uno = Matrices()
+            Matriz_dos = Segunda_Matriz(Matriz_uno)
+            print("Primera matriz: ")
+            for fila in Matriz_uno:
+                print(fila)
+            print("Segunda matriz: ")
+            for fila in Matriz_dos:
+                print(fila)
+            print("Suma de las filas de la primera matriz: ", Sumar_Fila(Matriz_uno))
+            print("Suma de las columnas de la primera matriz: ", Sumar_Columna(Matriz_uno))
+            print("Resta de las matrices: ")
+            for fila in Restar_Matrices(Matriz_uno, Matriz_dos):
+                print(fila)
+            numero = int(input("Ingrese un número para multiplicar la primera matriz: "))
+            Matriz_uno_multiplicada =Multiplicar_Matriz(Matriz_uno, numero)
+            print("Primera matriz multiplicada por el número: ")
+            for fila in Matriz_uno_multiplicada:
+                print(fila)
+            print("Producto de las matrices:")
+            Matriz_producto = Multiplicar_Matrices(Matriz_uno, Matriz_dos)
+            for fila in Matriz_producto:
+                print(fila)
+            print("Suma diagonal principal de la matriz uno: ", Suma_Diagonal_Principal(Matriz_uno))
+            print("Suma diagonal inversa de la matriz dos: ", Suma_Diagonal_Inversa(Matriz_dos))
+            print("Media de todos los elementos de la matriz multiplicación: ", Cálculo_Media_Matriz(Matriz_producto))
+
+        elif opcion == "3":
+            print("Gracias por usar este programa :)")
+            print()
+            break
+
+        else:
+            print("(Opcion invalida) Por favor ingrese otro número")
+            print()
+
+
+menu()
